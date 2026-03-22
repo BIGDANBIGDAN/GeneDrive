@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from "react";
+import { motion } from 'framer-motion';
+import { FiRefreshCw } from 'react-icons/fi';
 
 const D1=[
   {id:"D101",cn:"北欧极简",mj:"Scandinavian minimalist, clean pale tones"},
@@ -236,15 +238,15 @@ export default function App() {
   const catColor = catObj?.color || "#fff";
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", color: "#e5e5e5", fontFamily: "system-ui, sans-serif" }}>
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: 16 }}>
+    <div className="app-container">
+      <div className="max-w-3xl mx-auto p-4">
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <div>
             <h1 style={{ fontSize: 18, fontWeight: 800, margin: 0 }}>🧬 五维基因杂交器</h1>
             <p style={{ fontSize: 11, color: "#666", margin: "2px 0 0" }}>5维基因选择 → Midjourney Prompt</p>
           </div>
-          <button onClick={randomize} style={{ padding: "6px 14px", background: "#1e1e2e", border: "1px solid #333", borderRadius: 8, color: "#aaa", fontSize: 12, cursor: "pointer" }}>
+          <button onClick={randomize} className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-md text-sm text-gray-300">
             🎲 随机
           </button>
         </div>
@@ -482,7 +484,18 @@ export default function App() {
           )}
         </div>
 
-        <p style={{ textAlign: "center", fontSize: 10, color: "#333", marginTop: 12 }}>v8 · 五维基因杂交器 + 钩子解码</p>
+        <p className="text-center text-xs text-gray-500 mt-3">v8 · 五维基因杂交器 + 钩子解码</p>
+        {/* Floating action with motion */}
+        <motion.button
+          onClick={randomize}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.05 }}
+          className="fixed bottom-6 right-6 bg-violet-500 text-white p-3 rounded-full shadow-lg hover:shadow-2xl"
+          aria-label="随机"
+        >
+          <FiRefreshCw size={20} />
+        </motion.button>
       </div>
     </div>
   );
